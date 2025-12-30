@@ -5,6 +5,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('section');
 const navbarToggle = document.querySelector('.navbar__toggle');
 const navbarLinks = document.querySelector('.navbar__links');
+const themeToggle = document.querySelector('.theme-toggle');
 
 // Toggle mobile navigation
 if (navbarToggle && navbarLinks) {
@@ -111,4 +112,39 @@ if (contactForm) {
 const yearSpan = document.getElementById('year');
 if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
+}
+
+// Theme (light/dark) toggle with persistence
+const THEME_STORAGE_KEY = 'khea-portfolio-theme';
+
+const applyTheme = (theme) => {
+    const body = document.body;
+    const isDark = theme === 'dark';
+
+    body.classList.toggle('theme-dark', isDark);
+
+    if (themeToggle) {
+        themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        const icon = themeToggle.querySelector('i');
+        if (icon) {
+            icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+    }
+};
+
+// Initialize theme on load
+(() => {
+    const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
+    applyTheme(initialTheme);
+})();
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const isCurrentlyDark = document.body.classList.contains('theme-dark');
+        const newTheme = isCurrentlyDark ? 'light' : 'dark';
+        applyTheme(newTheme);
+        localStorage.setItem(THEME_STORAGE_KEY, newTheme);
+    });
 }
