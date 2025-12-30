@@ -17,6 +17,17 @@
     --transition-med: 0.35s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+/* Dark theme variable overrides */
+body.theme-dark {
+    /* Use a deep warm tone instead of pure black */
+    --bg-color: #1c1515;
+    --accent-color: #d46b6b;
+    --accent-soft: rgba(212, 107, 107, 0.2);
+    --text-color: #f7f3f0;
+    --text-muted: #c4b7b0;
+    --white: #241717;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -54,6 +65,10 @@ ul {
 
 .section--alt {
     background-color: #fff9e0;
+}
+
+body.theme-dark .section--alt {
+    background-color: #241717;
 }
 
 .container {
@@ -152,6 +167,42 @@ ul {
     height: 2px;
     background-color: var(--text-color);
     border-radius: 999px;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    margin-left: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.theme-toggle i {
+    font-size: 0.9rem;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+body.theme-dark .navbar {
+    background-color: #241717;
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+body.theme-dark .theme-toggle {
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.06);
 }
 
 /* =====================
@@ -388,9 +439,10 @@ ul {
    About Section (Full-bleed Image Layout)
    ===================== */
 
+
 .section--about {
     position: relative;
-    color: var(--white);
+    color: #ffffff;
     padding-block: 5rem;
     /* Full-width portrait background with dark gradient on the left */
     background-image:
@@ -414,7 +466,7 @@ ul {
 .section--about .section-label,
 .section--about .section-title,
 .section--about .section-description {
-    color: var(--white);
+    color: #ffffff;
 }
 
 .section--about .section-description {
@@ -454,7 +506,7 @@ ul {
 
 .section--about .about__icon {
     background-color: rgba(255, 255, 255, 0.14);
-    color: var(--white);
+    color: #ffffff;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
 }
 
@@ -698,6 +750,11 @@ ul {
     background-color: rgba(255, 252, 237, 0.98);
 }
 
+body.theme-dark .site-footer {
+    background-color: #1c1515;
+    border-top-color: rgba(255, 255, 255, 0.12);
+}
+
 .site-footer__inner {
     max-width: 1120px;
     margin: 0 auto;
@@ -820,6 +877,17 @@ ul {
 
     .skills__grid {
         grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Dark mode adjustments for mobile menu */
+@media (max-width: 768px) {
+    body.theme-dark .navbar__links {
+        background-color: rgba(28, 21, 21, 0.98);
+    }
+
+    body.theme-dark .navbar__links a {
+        color: #f5f5f5;
     }
 }
 
